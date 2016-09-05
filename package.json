@@ -1,0 +1,25 @@
+{
+  "name": "AspidaneChat",
+  "version": "1.0.0",
+  "description": "Current version of a simple Node.js chat server using socket.io",
+  "engines": {
+    "node": "4.4.7"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+	"socket.io": "1.4.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aspidane/chatserver"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "socket.io"
+  ],
+  "license": "Apache"
+}
