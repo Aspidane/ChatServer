@@ -1,5 +1,5 @@
 console.log("Starting Server");
-
+// Online version Sep/12 
 var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
@@ -43,7 +43,7 @@ function handler(req, res) {
    	});
 	//If they request the javascript file
 	} else if(req.url.indexOf(".js")>-1){
-    	//console.log("JavaScript requested");
+    	console.log("JavaScript requested");
     	//Read it to them
     	fs.readFile(__dirname + '/JavaScript/clientJS.js', function(jsErr, jsData){
          	//If there is an error, report it

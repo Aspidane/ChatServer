@@ -1,4 +1,5 @@
 "use strict";
+// Online version Sep/12 
     
 var max_valor_msg=300;
 var max_valor_username=15;
@@ -12,14 +13,18 @@ var users = [];
 //Array of chat rooms
 var chatrooms=[];
  
-//Connect to the server via socket.io
+//Connect to the server via socket.io    --WARNING-- REMOVE 'http://localhost' if it goes to the online version
+//var socket = io('http://localhost');
 var socket = io();
 
 var btnadd_me = document.getElementById('add_me');   
 var tabs = [];
 var tab_total_count = 0;
 
- 
+/*****************************************************/
+// Anchorme.js 0.6.0 (min function) License: The MIT License (MIT) - Copyright (c) 2016 Alex Corvi
+!function(e){"use strict";String.prototype.endsWith||(String.prototype.endsWith=function(e,t){var i=this.toString();("number"!=typeof t||!isFinite(t)||Math.floor(t)!==t||t>i.length)&&(t=i.length),t-=e.length;var n=i.indexOf(e,t);return-1!==n&&n===t}),String.prototype.startsWith||(String.prototype.startsWith=function(e,t){return t=t||0,this.substr(t,e.length)===e});var t={};t.occurrences=function(e,t,i){if(e+="",t+="",t.length<=0)return e.length+1;for(var n=0,r=0,a=i?1:t.length;;){if(r=e.indexOf(t,r),!(r>=0))break;n++,r+=a}return n},t.dontbreakHTML=function(e){for(var t=["src","href","cite","formaction","icon","manifest","poster","codebase","background","profile","usemap"],i=t.length;i--;){var n=[t[i]+'=" ',t[i]+"=' "],r=[t[i]+'="',t[i]+"='"];e=e.split(n[0]).join(r[0]),e=e.split(n[1]).join(r[1])}return e},t.removeCharifItEndsWithIt=function(e,i){return e.endsWith(i)?(e=e.substring(0,e.length-1),t.removeCharifItEndsWithIt(e,i)):e},t.TLDs=[".com",".org",".edu",".gov",".uk",".net",".ca",".de",".jp",".fr",".au",".us",".ru",".ch",".it",".nl",".se",".no",".es",".io",".aero",".mil",".biz",".cat",".coop",".info",".jobs",".mobi",".museum",".name",".pro",".travel",".ac",".ad",".ae",".af",".ag",".ai",".al",".am",".an",".ao",".ap",".aq",".ar",".as",".at",".aw",".az",".ax",".ba",".bb",".bd",".be",".bf",".bg",".bh",".bi",".bj",".bm",".bn",".bo",".br",".bs",".bt",".bv",".bw",".by",".bz",".cc",".cd",".cf",".cg",".ci",".ck",".cl",".cm",".cn",".co",".cr",".cs",".cu",".cv",".cx",".cy",".cz",".dj",".dk",".dm",".do",".dz",".ec",".ee",".eg",".eh",".er",".et",".eu",".fi",".fj",".fk",".fm",".fo",".ga",".gb",".gd",".ge",".gf",".gg",".gh",".gi",".gl",".gm",".gn",".gp",".gq",".gr",".gs",".gt",".gu",".gw",".gy",".hk",".hm",".hn",".hr",".ht",".hu",".id",".ie",".il",".im",".in",".io",".iq",".ir",".is",".je",".jm",".jo",".ke",".kg",".kh",".ki",".km",".kn",".kp",".kr",".kw",".ky",".kz",".la",".lb",".lc",".li",".lk",".lr",".ls",".lt",".lu",".lv",".ly",".ma",".mc",".md",".mg",".mh",".mk",".ml",".mm",".mn",".mo",".mp",".mq",".mr",".ms",".mt",".mu",".mv",".mw",".mx",".my",".mz",".na",".nc",".ne",".nf",".ng",".ni",".np",".nr",".nu",".nz",".om",".pa",".pe",".pf",".pg",".ph",".pk",".pl",".pm",".pn",".pr",".ps",".pt",".pw",".py",".qa",".re",".ro",".rw",".sa",".sb",".sc",".sd",".sg",".sh",".si",".sj",".sk",".sl",".sm",".sn",".so",".sr",".st",".sv",".sy",".sz",".tc",".td",".tf",".tg",".th",".tj",".tk",".tl",".tm",".tn",".to",".tp",".tr",".tt",".tv",".tw",".tz",".ua",".ug",".um",".uy",".uz",".va",".vc",".ve",".vg",".vi",".vn",".vu",".wf",".ws",".ye",".yt",".yu",".za",".zm",".zw",".guru",".berlin",".photography",".tips",".today",".email",".technology",".company",".clothing",".me",".asia",".abb",".academy",".active",".actor",".ads",".adult",".afl",".agency",".aig",".airforce",".alsace",".amsterdam",".android",".apartments",".app",".aquarelle",".archi",".army",".associates",".attorney",".auction",".audio",".auto",".autos",".axa",".azure",".band",".bank",".bar",".barcelona",".barclays",".bargains",".bauhaus",".bayern",".bbc",".bbva",".bcn",".beer",".bentley",".best",".bharti",".bible",".bid",".bike",".bing",".bingo",".bio",".black",".blackfriday",".bloomberg",".blue",".bmw",".bnl",".bnpparibas",".boats",".bond",".boo",".boutique",".bradesco",".bridgestone",".broker",".brother",".brussels",".budapest",".build",".builders",".business",".buzz",".bzh",".cab",".cafe",".cal",".camera",".camp",".canon",".capetown",".capital",".caravan",".cards",".care",".career",".careers",".cars",".cartier",".casa",".cash",".casino",".catering",".cba",".cbn",".center",".ceo",".cern",".cfa",".cfd",".channel",".chat",".cheap",".chloe",".christmas",".chrome",".church",".cisco",".citic",".city",".claims",".cleaning",".click",".clinic",".cloud",".club",".coach",".codes",".coffee",".college",".cologne",".community",".computer",".condos",".construction",".consulting",".contractors",".cooking",".cool",".corsica",".country",".coupons",".courses",".credit",".creditcard",".cricket",".crown",".crs",".cruises",".cuisinella",".cw",".cymru",".cyou",".dabur",".dad",".dance",".date",".dating",".datsun",".day",".dclk",".deals",".degree",".delivery",".delta",".democrat",".dental",".dentist",".desi",".design",".dev",".diamonds",".diet",".digital",".direct",".directory",".discount",".dnp",".docs",".dog",".doha",".domains",".doosan",".download",".drive",".durban",".dvag",".earth",".eat",".education",".emerck",".energy",".engineer",".engineering",".enterprises",".epson",".equipment",".erni",".esq",".estate",".eus",".events",".everbank",".exchange",".expert",".exposed",".express",".fail",".faith",".fan",".fans",".farm",".fashion",".feedback",".film",".finance",".financial",".firmdale",".fish",".fishing",".fit",".fitness",".flights",".florist",".flowers",".flsmidth",".fly",".foo",".football",".forex",".forsale",".forum",".foundation",".frl",".frogans",".fund",".furniture",".futbol",".fyi",".gal",".gallery",".game",".garden",".gbiz",".gdn",".gent",".genting",".ggee",".gift",".gifts",".gives",".glass",".gle",".global",".globo",".gmail",".gmo",".gmx",".gold",".goldpoint",".golf",".goo",".goog",".google",".gop",".graphics",".gratis",".green",".gripe",".guge",".guide",".guitars",".hamburg",".hangout",".haus",".healthcare",".help",".here",".hermes",".hiphop",".hitachi",".hiv",".hockey",".holdings",".holiday",".homedepot",".homes",".honda",".horse",".host",".hosting",".hoteles",".hotmail",".house",".how",".hsbc",".ibm",".icbc",".icu",".ifm",".iinet",".immo",".immobilien",".industries",".infiniti",".ing",".ink",".institute",".insure",".int",".international",".investments",".irish",".ist",".istanbul",".iwc",".java",".jcb",".jetzt",".jewelry",".jlc",".jll",".joburg",".jprs",".juegos",".kaufen",".kddi",".kim",".kitchen",".kiwi",".koeln",".komatsu",".krd",".kred",".kyoto",".lacaixa",".land",".lasalle",".lat",".latrobe",".law",".lawyer",".lds",".lease",".leclerc",".legal",".lgbt",".liaison",".lidl",".life",".lighting",".limited",".limo",".link",".live",".loan",".loans",".lol",".london",".lotte",".lotto",".love",".ltda",".lupin",".luxe",".luxury",".madrid",".maif",".maison",".management",".mango",".market",".marketing",".markets",".marriott",".mba",".media",".meet",".melbourne",".meme",".memorial",".men",".menu",".miami",".microsoft",".mini",".mma",".moda",".moe",".monash",".money",".montblanc",".mormon",".mortgage",".moscow",".motorcycles",".mov",".movie",".movistar",".mtn",".mtpc",".nadex",".nagoya",".navy",".nec",".netbank",".network",".neustar",".new",".news",".nexus",".ngo",".nhk",".nico",".ninja",".nissan",".nra",".nrw",".ntt",".nyc",".office",".okinawa",".omega",".one",".ong",".onl",".online",".ooo",".oracle",".orange",".organic",".osaka",".otsuka",".ovh",".page",".panerai",".paris",".partners",".parts",".party",".pharmacy",".philips",".photo",".photos",".physio",".piaget",".pics",".pictet",".pictures",".pink",".pizza",".place",".play",".plumbing",".plus",".pohl",".poker",".porn",".post",".praxi",".press",".prod",".productions",".prof",".properties",".property",".pub",".qpon",".quebec",".racing",".realtor",".realty",".recipes",".red",".redstone",".rehab",".reise",".reisen",".reit",".ren",".rent",".rentals",".repair",".report",".republican",".rest",".restaurant",".review",".reviews",".rich",".ricoh",".rio",".rip",".rocks",".rodeo",".rs",".rsvp",".ruhr",".run",".ryukyu",".saarland",".sakura",".sale",".samsung",".sandvik",".sap",".sarl",".saxo",".sca",".scb",".school",".schule",".schwarz",".science",".seat",".sener",".services",".sew",".sex",".sexy",".shiksha",".shoes",".show",".shriram",".singles",".site",".ski",".sky",".skype",".sncf",".soccer",".social",".software",".sohu",".solar",".solutions",".sony",".soy",".space",".spiegel",".spreadbetting",".starhub",".statoil",".studio",".study",".style",".su",".sucks",".supplies",".supply",".support",".surf",".surgery",".suzuki",".swatch",".swiss",".sx",".sydney",".systems",".taipei",".tatar",".tattoo",".tax",".taxi",".team",".tech",".tel",".telefonica",".temasek",".tennis",".thd",".theater",".tickets",".tienda",".tires",".tirol",".tokyo",".tools",".top",".toray",".toshiba",".tours",".town",".toys",".trade",".trading",".training",".trust",".tui",".ubs",".university",".uno",".uol",".vacations",".vegas",".ventures",".versicherung",".vet",".viajes",".video",".villas",".vision",".vista",".vistaprint",".vlaanderen",".vodka",".vote",".voting",".voto",".voyage",".wales",".walter",".wang",".watch",".webcam",".website",".wed",".wedding",".weir",".wien",".wiki",".win",".windows",".wme",".work",".works",".world",".wtc",".wtf",".xbox",".xerox",".xin",".xxx",".xyz",".yandex",".youtube",".zip",".zone",".zuerich"],t.checks={},t.checks.ip=function(e){if(t.occurrences(e,".")>2){var i=e.split("."),n=i[0],r=i[1],a=i[2];if(i[3].indexOf(":")>0)var s=i[3].indexOf(":"),o=i[3].substring(0,s),l=i[3].substring(s);else if(i[3].indexOf("/")>0)var c=i[3].indexOf("/"),o=i[3].substring(0,c),l=i[3].substring(c);else var o=i[3],l=!1;return(l===!1||"/"===l.charAt(0)||":"===l.charAt(0))&&!isNaN(n)&&!isNaN(r)&&!isNaN(a)&&!isNaN(o)&&254>=n-1&&254>=r-1&&254>=a-1&&254>=o-1&&n.length>0&&r.length>0&&a.length>0&&o.length>0?!0:!1}return!1},t.checks.email=function(e,i){if(e=e.toLowerCase(),1==t.occurrences(e,"@")){e=t.removeCharifItEndsWithIt(e,"."),e=t.removeCharifItEndsWithIt(e,","),e=t.removeCharifItEndsWithIt(e,";");for(var n=e.indexOf("@"),r=e.substring(0,n),a=e.substring(n+1,e.length),s=!0,o=0;o<r.length;o++){var l=r[o];-1==="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'*+-/=?^_`{|}~.".indexOf(l)&&(o=r.length,s=!1)}for(var o=0;o<a.length;o++){var c=a[o];-1==="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.:".indexOf(c)&&(o=a.length,s=!1)}if(s){for(var d=!1,o=0;i>o;o++){var u=t.TLDs[o];e.endsWith(u)&&(o=t.TLDs.length,d=!0)}return d===!0?!0:!1}return!1}return!1},t.checks.url=function(e,i){if(e=e.toLowerCase(),e.indexOf(".")>0&&(e.indexOf("/")>3||e.indexOf("/")<0)){if(e=t.removeCharifItEndsWithIt(e,"."),e=t.removeCharifItEndsWithIt(e,","),e=t.removeCharifItEndsWithIt(e,";"),1==t.occurrences(e,".")&&e.indexOf(".")===e.length-1)return!1;var n=!0;if(e.indexOf("/")>3){var r=e.indexOf("/"),a=e.substring(0,r);if(a.indexOf("..")>-1)return!1;for(var s=0;s<a.length;s++){var o=a[s];-1==="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.:".indexOf(o)&&(s=a.length,n=!1)}}else{if(e.indexOf("..")>-1)return!1;for(var s=0;s<e.length;s++){var o=e[s];-1==="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.:".indexOf(o)&&(s=e.length,n=!1)}}if(n){if(e.endsWith(".com"))return!0;for(var s=0;i>s;s++){var l=t.TLDs[s];if(e.endsWith(l)||e.indexOf(l+"/")>-1||e.indexOf(l+":")>-1)return s=t.TLDs.length,!0}return!1}return!1}return!1},t.order=function(e,i){var n=e.split(" "),r=function(e){for(var t=0;t<e.length;t++)!(e[t].indexOf(".")>-1&&""!==e[t])||"("===e[t-1]&&")"===e[t+1]||"("!==e[t+1]&&")"!==e[t+1]||(e[t]=e[t]+e[t+1],"string"==typeof e[t+2]&&(e[t]=e[t]+e[t+2]),"string"==typeof e[t+3]&&(e[t]=e[t]+e[t+3]),"string"==typeof e[t+4]&&(e[t]=e[t]+e[t+4]),e.splice(t+1,4),r(e))},a=function(e){for(var t=0;t<e.length;t++)!(e[t].indexOf(".")>-1&&""!==e[t])||"["===e[t-1]&&"]"===e[t+1]||"["!==e[t+1]&&"]"!==e[t+1]||(e[t]=e[t]+e[t+1],"string"==typeof e[t+2]&&(e[t]=e[t]+e[t+2]),"string"==typeof e[t+3]&&(e[t]=e[t]+e[t+3]),"string"==typeof e[t+4]&&(e[t]=e[t]+e[t+4]),e.splice(t+1,4),r(e))};r(n),a(n);for(var s=0;s<n.length;s++){for(var o=!1,l=s;l>0&&(">"!==n[l]||"/a"!==n[l-1]||"<"!==n[l-2]);l--)if("a"===n[l]&&"<"===n[l-1]){o=!0;break}if(!o){var c=n[s],d=!1,u=!1;if(c.indexOf(".")>-1){for(var f=!0,h="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=%",g=0;g<c.length;g++){var m=c[g];-1===h.indexOf(m)&&(g=c.length,f=!1)}if(f&&(i.urls&&(c.startsWith("http://")||c.startsWith("HTTP://"))?d=!0:i.urls&&(c.startsWith("https://")||c.startsWith("HTTPS://"))?d=!0:i.urls&&(c.startsWith("ftp://")||c.startsWith("FTP://"))?d=!0:i.urls&&(c.startsWith("file:///")||c.startsWith("FILE:///"))?d=!0:i.emails&&(c.startsWith("mailto:")||c.startsWith("MAILTO:"))?d=!0:t.checks.ip(c)&&i.ips&&c.indexOf(".")>0?(d=!0,u=i.defaultProtocol):t.checks.email(c,i.TLDs)&&i.emails&&c.indexOf(".")>-1&&c.indexOf("@")>-1?(d=!0,u="mailto:"):t.checks.url(c,i.TLDs)&&i.urls&&(d=!0,u=i.defaultProtocol),d)){var p=u?u+c:c;p=t.removeCharifItEndsWithIt(p,"."),p=t.removeCharifItEndsWithIt(p,","),p=t.removeCharifItEndsWithIt(p,";");var b=i.truncate<=1?c:c.substring(0,i.truncate)+"...";if(i.attributes){n[s]="<a href='"+p+"'";for(var v in i.attributes)n[s]=n[s]+" "+v+"='"+i.attributes[v]+"' ";n[s]=n[s]+">"+b+"</a>"}else n[s]="<a href='"+p+"'>"+b+"</a>"}}}}return n.join(" ")},t.js=function(e,i){"object"!=typeof i?i={attributes:!1,html:!0,ips:!0,emails:!0,urls:!0,TLDs:20,truncate:0,defaultProtocol:"http://"}:("object"!=typeof i.attributes&&(i.attributes=!1),"boolean"!=typeof i.html&&(i.html=!0),"boolean"!=typeof i.ips&&(i.ips=!0),"boolean"!=typeof i.emails&&(i.emails=!0),"boolean"!=typeof i.urls&&(i.urls=!0),"number"!=typeof i.TLDs&&(i.TLDs=20),"string"!=typeof i.defaultProtocol&&(i.defaultProtocol="http://"),"number"!=typeof i.truncate&&(i.truncate=0)),i.html&&(e.indexOf("</a>")>-1||e.indexOf("<img ")>-1||e.indexOf("<blockquote ")>-1||e.indexOf("<del ")>-1||e.indexOf("<iframe ")>-1||e.indexOf("<script  ")>-1||e.indexOf("<audio ")>-1||e.indexOf("<button ")>-1||e.indexOf("<command ")>-1||e.indexOf("<embed ")>-1||e.indexOf("<html ")>-1||e.indexOf("<video ")>-1||e.indexOf("<applet ")>-1||e.indexOf("<area ")>-1||e.indexOf("<base ")>-1||e.indexOf("<body ")>-1||e.indexOf("<frame ")>-1||e.indexOf("<head ")>-1||e.indexOf("<usemap ")>-1||e.indexOf("<link ")>-1||e.indexOf("<input ")>-1||e.indexOf("<source ")>-1||e.indexOf("<q ")>-1)&&(e=t.dontbreakHTML(e)),e=e.split("\n").join(" \n "),e=e.split("(").join(" ( "),e=e.split(")").join(" ) "),e=e.split("[").join(" [ "),e=e.split("]").join(" ] "),e=e.split("<").join(" < "),e=e.split(">").join(" > ");var n=t.order(e,i);return n=n.split(" \n ").join("\n"),n=n.split(" ( ").join("("),n=n.split(" ) ").join(")"),n=n.split(" [ ").join("["),n=n.split(" ] ").join("]"),n=n.split(" < ").join("<"),n=n.split(" > ").join(">")},"undefined"!=typeof exports?("undefined"!=typeof module&&module.exports&&(exports=module.exports=t),exports.anchorme=t):"function"==typeof define&&define.amd?define("anchorme",[],function(){return t}):e.anchorme=t}("object"==typeof window?window:this);
+
 /*****************************************************/
 socket.on('welcome', function (data) {
 	console.log(data);
@@ -33,15 +38,10 @@ socket.on('welcome', function (data) {
 	//This will include the newly connected user
 	users=data["others"];
     chatrooms=data["rooms"]
-    
     //Load the rooms
     refresh_rooms();
     
-    //Add the "General" chatroom
-    //btn_add_me_Click('General');
-    
 	console.log("users: "+users);
-    
     console.log("\nNumber of tabs: "+tabs.length);
     for(var i=0;i<tabs.length;i++){
    	 console.log("\ntabs["+i+"]:");
@@ -60,11 +60,9 @@ socket.on('messageFromServer', function (data) {
     	//Get the contents, the sender, and the room it should be posted to
     	var received=data["message"];
     	var sender=data["sender"];
-   	 var room=data["room"];
-   	 
+        var room=data["room"];
     	//Add the message to the chat
     	write_in_chat(typeReceived,sender,received,room);
-   	 
 	//1 is the response to the user trying to update their username   	 
 	} else if("1"==typeReceived){
     	//variable to hold the attempt's result (true==success, false==failure)
@@ -123,7 +121,6 @@ socket.on('messageFromServer', function (data) {
             	//Refresh the online user list
             	refreshUsers();
             	write_in_chat(typeReceived,oldName,newName,"");
-   			 //
             	break; //And exit the loop
         	}    
     	}
@@ -136,11 +133,8 @@ socket.on('messageFromServer', function (data) {
 socket.on('newPrivateMessage', function (data) {
 	//type "5" private msg
 	var typeReceived="5";
-    
 	//alert(data["sender"]+", "+data["recipient"]+", "+data["message"]);
-    
 	write_in_chat(typeReceived,data["sender"],data["recipient"],data["message"]);   
-    
 	console.log("New private message");
 	console.log(data["sender"]+" sent this user ("+data["recipient"]+") the following message: "+data["message"]);
 });
@@ -206,63 +200,19 @@ function refresh_rooms(){
     console.log("chatrooms:"+chatrooms);
     
     //Clear out the current list
-    chatList.innerHTML="Chatrooms";
+    chatList.innerHTML="Chat-Rooms";
     
     //For each chatroom, we'll create a menu
     for(var i=0;i<chatrooms.length;i++){
-   	 
-   	 //Temporary name; holds the option
-   	 var temp_name= "option_chat_container"+i;
-   	 
-    	//Creates a container the container and
-   	 //gives it the "chatroom_container" class
-   	 var main_container = document.createElement("div");
-   	 main_container.setAttribute("class","chatroom_container");
-   	 
-   	 //Creates a div and make it a button
-   	 //When clicked, it calls "chat_on_click"
-   	 var main_chat_on = document.createElement("div");
-   	 main_chat_on.setAttribute("class","chat_on");
-   	 main_chat_on.setAttribute("onclick","chat_on_click('"+temp_name+"')");  
-   	 
-   	 //Creates the text that dispaly's the chatroom's name
-   	 //and puts it in the div
-   	 var name_user = document.createTextNode(chatrooms[i]);
-   	 main_chat_on.appendChild(name_user);
-   	 
-   	 //We add it to the div to the main_container
-    	main_container.appendChild(main_chat_on);
-   	 
-   	 //Create another div and give it a class and the temp+name as an id
-    	var main_option_chat_container = document.createElement("div");
-    	main_option_chat_container.setAttribute("class","option_chat_container");   
-   	 main_option_chat_container.setAttribute("id",temp_name);    	 
-   	 
-    	//Create the option in the list
-   	 var option1 = document.createElement("div");
-   	 //Give it an id
-   	 option1.setAttribute("id","join_chat"+i);
-   	 
-   	 //
-   	 option1.setAttribute("onclick","add_me_chatroom('"+chatrooms[i]+"')");   
-   	 var text_option_1 = document.createTextNode('Join chat'+i);
-   	 option1.appendChild(text_option_1);
-   	 
-   	 //Template nore new options
-    	//var optionx = document.createElement("div");
-   	 //optionx.setAttribute("id","join_chat"+i);
-   	 //optionx.setAttribute("class","my_p_msg");
-   	 //optionx.setAttribute("onclick","btn_add_me_Click('"+chatrooms[i]+"')");
-   	 
-   	 main_option_chat_container.appendChild(option1);
-   	 //appending the option_user_container to the main_container    
-   	 main_container.appendChild(main_option_chat_container);
-   	 
-    	//Finally, we add our container to the list of chatrooms (with a newline)
-   	 //It'll have the options and
-    	chatList.appendChild(main_container);
+        var room_container = document.createElement("div");
+        room_container.setAttribute("id","join_chat"+i);
+        room_container.setAttribute("class","my_chatroom");
+        room_container.setAttribute("onclick","add_me_chatroom('"+chatrooms[i]+"')");  
+        var room_text = document.createTextNode(chatrooms[i]);
+    	room_container.appendChild(room_text);        
+    	chatList.appendChild(room_container);
     	chatList.innerHTML += "<br />";   	 
-	}
+	}//for
 }
 /*****************************************************/    
 function user_on_click(element_id) {
@@ -291,10 +241,8 @@ function chat_on_click(element_id) {
 /*****************************************************/
 // Close the menu if the user clicks outside of it
 window.onclick = function(event) {
-    
     //Variable to hold the menu elements
     var dropdowns;
-    
 	if (!event.target.matches('.user_on')) { //this is when I click outside any user_on to make dissapear the little menu
     	dropdowns = document.getElementsByClassName("option_user_container");
     	//if(dropdowns.length==0) alert(dropdowns.length);
@@ -351,35 +299,35 @@ function sendMessage(){
         	}
     	}    
 
-   	 if(tab_name!=null){
+        if(tab_name!=null){
         	var recipient=finding_name(tab_name);
    			 
-   		 //Flag for whther or not a tab is a room
-   		 var room_flag=false;
+            //Flag for whther or not a tab is a room
+            var room_flag=false;
    			 
-   		 //Check to see if it is a room
-   		 for(var i=0;i<chatrooms.length;i++){
-   			 //If we have a match
-   			 if(tab_name==chatrooms[i]){
-   				 room=chatrooms[i];   					 
-   				 //Set the flag
-   				 room_flag=true;
-   				 break; //And break out of the loop
-   			 }
-   		 }
+            //Check to see if it is a room
+            for(var i=0;i<chatrooms.length;i++){
+                //If we have a match
+                if(tab_name==chatrooms[i]){
+                    room=chatrooms[i];   					 
+                    //Set the flag
+                    room_flag=true;
+                    break; //And break out of the loop
+                }
+            }
    			 
         	//if is a private message
-   		 if(!room_flag){
-   			 console.log("sending pm: "+ellipse(input.value, max_valor_msg));   	 
-   			 socket.emit("newPrivateMessage", {message:ellipse(input.value, max_valor_msg), user:recipient});
-   			 //WARNING am I cheating???
-   			 write_in_chat("6",recipient,username,ellipse(input.value, max_valor_msg));
-   			 //If it is a chat room
-   		 } else {
-   			 console.log("sending "+input.value+" to "+room);
-   			 //Send it to the server as a message
-   			 socket.emit("messageToServer", {message:ellipse(input.value, max_valor_msg), room:room});  
-   		 }
+            if(!room_flag){
+                console.log("sending pm: "+ellipse(input.value, max_valor_msg));   	 
+                socket.emit("newPrivateMessage", {message:ellipse(input.value, max_valor_msg), user:recipient});
+                //WARNING am I cheating???
+                write_in_chat("6",recipient,username,ellipse(input.value, max_valor_msg));
+                //If it is a chat room
+            } else {
+                console.log("sending "+input.value+" to "+room);
+                //Send it to the server as a message
+                socket.emit("messageToServer", {message:ellipse(input.value, max_valor_msg), room:room});  
+            }
     	}
 	}
 	//Clear out the text
@@ -451,7 +399,8 @@ function write_in_chat(type,msg1,msg2,msg3){
     	var tab_i= finding_tab_byname(msg3);
     	//alert(msg1 +" "+tab_i);       	 
     	if(tab_i>=0){
-        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+msg2+"</span>";
+            // using anchorme.js("text who might contains links") to make it clickable
+        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+anchorme.js(msg2)+"</span>";
         	if (tabs[tab_i].tab_status== true){
             	refreshing_modal(tab_i);
         	} else {
@@ -459,8 +408,7 @@ function write_in_chat(type,msg1,msg2,msg3){
    		 }
     	}
 	}else if(type=="4"){ // system msg: user changed name
-   	 console.log("Changed name\n");
-   	 
+        console.log("Changed name\n");
     	var tab_i= finding_tab_byname("General");
     	if(tab_i>=0){ // updating general log
         	tabs[tab_i].tab_log += "<br /><span class='systemMsg'>"+msg1+" has changed their name to "+msg2+"</span>";
@@ -469,9 +417,7 @@ function write_in_chat(type,msg1,msg2,msg3){
         	}
     	}
     	var tab_i= finding_tab_byname(msg1);
-   	 
-   	 console.log("tab_i: "+tab_i);
-   	 
+        console.log("tab_i: "+tab_i);
     	if(tab_i>=0){ //updating private msg log
    		 tabs[tab_i].tab_log += "<br /><span class='systemMsg'>"+msg1+" has changed their name to "+msg2+"</span>";
    		 if (tabs[tab_i].tab_status== true){
@@ -506,7 +452,7 @@ function write_in_chat(type,msg1,msg2,msg3){
     	var tab_i= finding_tab_byname(msg1);
     	//alert(msg1 +" "+tab_i);   	 
     	if(tab_i>=0){ //updating private msg log
-        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+msg3+"</span>";
+        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+anchorme.js(msg3)+"</span>";
         	if (tabs[tab_i].tab_status== true){
             	refreshing_modal(tab_i);
         	} else {
@@ -516,7 +462,7 @@ function write_in_chat(type,msg1,msg2,msg3){
         	btn_add_me_Click(msg1);
         	tab_i= finding_tab_byname(msg1);
         	//alert(msg1 +" "+tab_i);
-        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+msg3+"</span>";
+        	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg1+":</span>  "+anchorme.js(msg3)+"</span>";
         	if (tabs[tab_i].tab_status== true){
             	refreshing_modal(tab_i);
         	}
@@ -524,7 +470,7 @@ function write_in_chat(type,msg1,msg2,msg3){
 	}else if(type=="6"){
     	var tab_i= finding_tab_byname(msg1);
     	//alert(msg2 +" "+tab_i);
-    	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg2+":</span>  "+msg3+"</span>";
+    	tabs[tab_i].tab_log += "<br /><span class='userMsg'><span class='username'>"+msg2+":</span>  "+anchorme.js(msg3)+"</span>";
     	refreshing_modal(tab_i);   	 
 	}    
 }
@@ -553,29 +499,29 @@ function destroy_me_Click(event) {
         	}
         	//now i must delete the info from the tabs
         	tabs.splice(i,1);
-   		 //Now set the focus on the next tab
-   		 //Swap to one to the right or to the left most if none are to the right
-   		 //Start by making sure there are tabs left
-   		 if(tabs.length>0){
-   			 //Case where we deleted the right most tab
-   			 if(tabs.length==i){
-   				 //Swap the tab to the left
-   				 dialog_on_click(tabs[i-1].id_name);
-   			 //Case where we did not delete the right most tab
-   			 } else {
-   				 //Swap to the next tab
-   				 dialog_on_click(tabs[i].id_name);
-   			 }
-   		 //If there are no tabs left, clear the chat area
-   		 } else {
-   			 //Get the chat area
-   			 var chatArea=document.getElementById("myModal");
-   			 //Remove the conversation history
-   			 chatArea.innerHTML="";
-   		 }
+            //Now set the focus on the next tab
+            //Swap to one to the right or to the left most if none are to the right
+            //Start by making sure there are tabs left
+            if(tabs.length>0){
+                //Case where we deleted the right most tab
+                if(tabs.length==i){
+                    //Swap the tab to the left
+                    dialog_on_click(tabs[i-1].id_name);
+                    //Case where we did not delete the right most tab
+                } else {
+                    //Swap to the next tab
+                    dialog_on_click(tabs[i].id_name);
+                }
+            //If there are no tabs left, clear the chat area
+            } else {
+                //Get the chat area
+                var chatArea=document.getElementById("myModal");
+                //Remove the conversation history
+                chatArea.innerHTML="";
+            }
         	break; //And exit the loop
-        	}    
-    	}    	 
+        }    
+    }    	 
 }
 /*****************************************************/  	 
 function add_me_chatroom(chat_name){
@@ -629,8 +575,6 @@ function add_me_chatroom(chat_name){
     	tab.appendChild(closing_x);
     	closing_x.addEventListener('click', destroy_me_Click);  
    	 
-    	document.getElementById(new_tab.id_name).focus;
-
     	dialog_on_click(new_tab.id_name); // adds the focus to the lastest created (or just the new one)
 	}else{
     	dialog_on_click(old_tab_id_name); // adds the focus to the tab that has the user we want to talk and was created before
