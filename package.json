@@ -1,20 +1,22 @@
 {
-  "name": "AspidaneChat",
+  "name": "betaserver",
   "version": "1.0.0",
-  "description": "Current version of a simple Node.js chat server using socket.io",
+  "description": "BETA version of a simple Node.js chat server using socket.io",
   "engines": {
     "node": "4.4.7"
   },
-  "main": "app.js",
+  "main": "betaapp.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node betaapp.js"
   },
   "dependencies": {
-    "socket.io": "1.4.8"
+	"socket.io": "1.4.8",
+	"validator":"6.1.0",
+    "sanitize-html":"1.13.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aspidane/chatserver"
+    "url": "https://github.com/aspidane/betaserver"
   },
   "keywords": [
     "node",
